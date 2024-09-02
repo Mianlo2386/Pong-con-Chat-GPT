@@ -32,26 +32,26 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(800, 400);
+    createCanvas(windowWidth, windowHeight);
     
     // Inicialización de la raqueta del jugador
     jugadorAncho = 10;
-    jugadorAlto = 70;
+    jugadorAlto = windowHeight * 0.2;
     jugadorX = 15;
     jugadorY = height / 2 - jugadorAlto / 2;
     
     // Inicialización de la raqueta de la computadora
     computadoraAncho = 10;
-    computadoraAlto = 70;
+    computadoraAlto = windowHeight * 0.2;
     computadoraX = width - 15 - computadoraAncho;
     computadoraY = height / 2 - computadoraAlto / 2;
     
     // Inicialización de la pelota
-    pelotaDiametro = 20;
+    pelotaDiametro = windowHeight * 0.05;
     pelotaX = width / 2;
     pelotaY = height / 2;
-    pelotaVelocidadX = 5;
-    pelotaVelocidadY = 3;
+    pelotaVelocidadX = windowWidth * 0.005;
+    pelotaVelocidadY = windowHeight * 0.003;
 }
 
 function draw() {
@@ -146,8 +146,8 @@ function draw() {
 function reiniciarPelota() {
     pelotaX = width / 2;
     pelotaY = height / 2;
-    pelotaVelocidadX = pelotaVelocidadX > 0 ? 5 : -5; // Reiniciar velocidad con el mismo sentido
-    pelotaVelocidadY = random(-3, 3); // Velocidad vertical aleatoria
+    pelotaVelocidadX = pelotaVelocidadX > 0 ? windowWidth * 0.005 : -windowWidth * 0.005; // Reiniciar velocidad con el mismo sentido
+    pelotaVelocidadY = random(-windowHeight * 0.003, windowHeight * 0.003); // Velocidad vertical aleatoria
     velocidadRotacion = 0.05; // Reiniciar la velocidad de rotación
     anguloPelota = 0;  // Reiniciar el ángulo de rotación
 }
@@ -157,4 +157,8 @@ function narrarMarcador() {
     let utterance = new SpeechSynthesisUtterance(mensaje);
     utterance.lang = 'es-ES';  // Configurar el idioma a español
     speechSynthesis.speak(utterance);
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
 }

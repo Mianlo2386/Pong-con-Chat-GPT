@@ -1,7 +1,8 @@
 html, body {
     margin: 0;
     padding: 0;
-  }
-  canvas {
+    overflow: hidden;  /* Evitar que aparezcan barras de desplazamiento */
+}
+canvas {
     display: block;
-  }
+}
